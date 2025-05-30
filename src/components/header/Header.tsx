@@ -30,6 +30,12 @@ const Header = () => {
           >
             Statistic
           </Link>
+          <Link
+            to="/login"
+            className="text-white hover:text-yellow-300 transition duration-200 font-medium"
+          >
+            Login
+          </Link>
         </nav>
       </div>
     </header>

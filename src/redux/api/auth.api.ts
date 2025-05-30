@@ -12,25 +12,32 @@ const extendedApi = mainApi.injectEndpoints({
     }),
     sendOtp: build.mutation({
       query: (body) => ({
-        method:"POST",
+        method: "POST",
         url: "/auth/send-otp",
-        body
+        body,
       }),
     }),
     verifyOtp: build.mutation({
       query: (body) => ({
         method: "POST",
         url: "/auth/verify-otp",
-        body
-      })
+        body,
+      }),
     }),
     registerAuth: build.mutation({
       query: (body) => ({
         method: "POST",
         url: "/auth/register",
-        body
-      })
-    })
+        body,
+      }),
+    }),
+    loginAuth: build.mutation({
+      query: (body) => ({
+        method: "POST",
+        url: "/auth/login",
+        body,
+      }),
+    }),
   }),
   overrideExisting: false,
 });
@@ -39,5 +46,6 @@ export const {
   useGetProfileQuery,
   useSendOtpMutation,
   useVerifyOtpMutation,
-  useRegisterAuthMutation
+  useRegisterAuthMutation,
+  useLoginAuthMutation,
 } = extendedApi;

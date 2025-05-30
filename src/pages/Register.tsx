@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux";
-import { Button, Form, Input, Typography, Select } from "antd";
+import { Button, Form, Input, Typography, Select, message } from "antd";
 import type { FormProps } from "antd";
 import { useGetRegionsQuery } from "../redux/api/region.api";
 import { useRegisterAuthMutation } from "../redux/api/auth.api";
 import ImageUpload from "./ImageUpload";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const { Title } = Typography;
 
@@ -27,13 +28,26 @@ const Register = () => {
   }));
   const [registerAuth, { isLoading }] = useRegisterAuthMutation();
   const [img, setImg] = useState("");
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    values.img = img;
+    values.img = img || "https://via.placeholder.com/150";
+
     registerAuth(values)
       .unwrap()
       .then((res) => {
         console.log(res);
+        message.success("Registration successful! Redirecting to login..."); // Success message
+        // Redirect to login page after a short delay for the user to see the message
+        setTimeout(() => {
+          navigate("/login"); // Adjust the route to match your login path
+        }, 1000); // 1-second delay
+      })
+      .catch((err) => {
+        const errorMessage =
+          err?.data?.message || "Registration failed. Please try again.";
+        message.error(errorMessage);
+        console.error("Registration error:", err);
       });
   };
 

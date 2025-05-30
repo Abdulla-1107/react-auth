@@ -56,8 +56,7 @@ const ImageUpload: React.FC<Props> = ({ onImageUpload }) => {
     try {
       const res = await axios.post("https://keldibekov.online/upload", fmData);
       onSuccess("ok");
-      // 🔥 Server `url`ni JSON ichida qaytaradi deb hisoblab, uni `response.url` deb olamiz
-      onImageUpload(res.data.url); // bu joy eng muhim
+      onImageUpload(res.data.url);
     } catch (err) {
       onError(err);
     }
