@@ -70,7 +70,7 @@ export const EmailSender: React.FC<EmailSenderProps> = ({ setEmail, isLoading })
           name="email"
           rules={[{ required: true, message: "Please input your email!" }]}
         >
-          <Input />
+          <Input placeholder="@gmail.com"/>
         </Form.Item>
         <Form.Item label={null}>
           <Button loading={isLoading} className="w-full" type="primary" htmlType="submit">
