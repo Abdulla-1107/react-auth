@@ -6,8 +6,7 @@ import type { FormProps } from "antd";
 import { useGetRegionsQuery } from "../redux/api/region.api";
 import { useRegisterAuthMutation } from "../redux/api/auth.api";
 import ImageUpload from "./ImageUpload";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-
+import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
 
 type FieldType = {
@@ -28,7 +27,7 @@ const Register = () => {
   }));
   const [registerAuth, { isLoading }] = useRegisterAuthMutation();
   const [img, setImg] = useState("");
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     values.img = img || "https://via.placeholder.com/150";
@@ -37,11 +36,10 @@ const Register = () => {
       .unwrap()
       .then((res) => {
         console.log(res);
-        message.success("Registration successful! Redirecting to login..."); // Success message
-        // Redirect to login page after a short delay for the user to see the message
+        message.success("Registration successful! Redirecting to login...");
         setTimeout(() => {
-          navigate("/login"); // Adjust the route to match your login path
-        }, 1000); // 1-second delay
+          navigate("/login");
+        }, 1000);
       })
       .catch((err) => {
         const errorMessage =
